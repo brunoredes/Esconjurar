@@ -109,29 +109,58 @@ public class ViewFirstScreen {
 		txtMaxHp.setBounds(271, 145, 99, 20);
 		frame.getContentPane().add(txtMaxHp);
 		txtMaxHp.setColumns(10);
-		
+
 		JComboBox cbInitialChance = new JComboBox();
-		cbInitialChance.setModel(new DefaultComboBoxModel(new Integer[] {2, 4, 6, 8, 10, 12, 14, 16, 18, 20}));
+		cbInitialChance.setModel(new DefaultComboBoxModel(new Integer[] { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 }));
 		cbInitialChance.setMaximumRowCount(10);
 		cbInitialChance.setBounds(57, 145, 61, 22);
 		frame.getContentPane().add(cbInitialChance);
-		
+
 		JButton btnCalculate = new JButton("Calcular");
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer initChance = (Integer) cbInitialChance.getSelectedItem();
-				Integer nivel = Integer.parseInt(txtNivel.getText());		
+				Integer nivel = Integer.parseInt(txtNivel.getText());
 				Integer charInt = Integer.parseInt(txtInt.getText());
 				Integer charLuk = Integer.parseInt(txtLuk.getText());
 				Integer hpMod = Integer.parseInt(txtHpLatest.getText());
 				Integer hpMax = Integer.parseInt(txtMaxHp.getText());
 
-				Integer chance = (initChance + (nivel / 10) + (charInt / 10) + (charLuk / 10)
-						+ (1 - (hpMod / hpMax)) * 20);
-				JOptionPane.showMessageDialog(null, "Chance de Esconjurar: " + chance + "%");	
+				try {
+
+					if (nivel <= 0) {
+						JOptionPane.showMessageDialog(null, "Nível não pode ser menor que 1", "",
+								JOptionPane.WARNING_MESSAGE);
+					} else if (nivel > 175) {
+						JOptionPane.showMessageDialog(null, "Nível não pode ser maior que 175", "",
+								JOptionPane.WARNING_MESSAGE);
+					} else if (hpMod > hpMax) {
+						JOptionPane.showMessageDialog(null, "O HP restante não pode ser maior que o HP máximo do mob",
+								"", JOptionPane.WARNING_MESSAGE);
+					} else if (hpMod <= 0) {
+						JOptionPane.showMessageDialog(null, "O HP restante não pode ser menor ou igual que 0", "",
+								JOptionPane.WARNING_MESSAGE);
+					} else if (hpMax <= 0) {
+						JOptionPane.showMessageDialog(null, "O HP máximo não pode ser menor ou igual a 0", "",
+								JOptionPane.WARNING_MESSAGE);
+					} else if (charInt <= 0 || charLuk <= 0) {
+						JOptionPane.showMessageDialog(null, "Atributos não podem ser menor ou igual a 0", "",
+								JOptionPane.WARNING_MESSAGE);
+					} else if (charInt > 130 || charLuk > 130) {
+						JOptionPane.showMessageDialog(null, "Atributos não podem ser maior que 130", "",
+								JOptionPane.WARNING_MESSAGE);
+					} else {
+						Integer chance = (initChance + (nivel / 10) + (charInt / 10) + (charLuk / 10)
+								+ (1 - (hpMod / hpMax)) * 20);
+						JOptionPane.showMessageDialog(null, "Chance de Esconjurar: " + chance + "%");
+					}
+				} 
+				catch (NumberFormatException error) {
+					JOptionPane.showMessageDialog(null, "Preencha os campos em branco", "", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		
+
 		btnCalculate.setBounds(166, 200, 89, 23);
 		frame.getContentPane().add(btnCalculate);
 	}
