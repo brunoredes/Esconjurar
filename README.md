@@ -18,7 +18,23 @@ do jogo [Ragnarok Online](https://playragnarokonlinebr.com/)
 - [Java](https://www.java.com/pt_BR/)
 - [JFrame](https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html), [JOptionPane](https://docs.oracle.com/javase/7/docs/api/javax/swing/JOptionPane.html)
 
-### Como usar:
+## Como usar:
+- Após compilar com sucesso, [gerar o arquivo jar](https://www.caelum.com.br/apostila-java-orientacao-objetos/ferramentas-jar-e-javadoc#gerando-o-jar-pelo-eclipse)
+e executar com clique duplo, ou utilizando o terminal:
+```bash
+java -jar <nomeDoArquivo>         sem o '<>'
+``` 
+### Requisitos necessários:
+Ter o java instalado no SO.
+
+> Versão que eu utilizei para criar essa calculadora: 
+```
+java version "1.8.0_251"
+Java(TM) SE Runtime Environment (build 1.8.0_251-b08)
+Java HotSpot(TM) Client VM (build 25.251-b08, mixed mode, sharing)
+```
+
+### Funcionamento
 ![image](https://user-images.githubusercontent.com/42386513/88466130-ae713c80-ce9f-11ea-9ca4-cb9f63f967b0.png)
 
 > Inserir apenas números inteiros
