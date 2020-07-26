@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 public class ViewFirstScreen {
 
@@ -28,6 +29,7 @@ public class ViewFirstScreen {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					ViewFirstScreen window = new ViewFirstScreen();
@@ -53,7 +55,7 @@ public class ViewFirstScreen {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblNivel = new JLabel("N\u00EDvel de base:");
@@ -97,7 +99,7 @@ public class ViewFirstScreen {
 		frame.getContentPane().add(lblHpLatest);
 
 		JLabel lblMaxHp = new JLabel("HP m\u00E1ximo do alvo:");
-		lblMaxHp.setBounds(276, 120, 124, 14);
+		lblMaxHp.setBounds(271, 120, 124, 14);
 		frame.getContentPane().add(lblMaxHp);
 
 		txtHpLatest = new JTextField();
@@ -118,15 +120,16 @@ public class ViewFirstScreen {
 
 		JButton btnCalculate = new JButton("Calcular");
 		btnCalculate.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Integer initChance = (Integer) cbInitialChance.getSelectedItem();
-				Integer nivel = Integer.parseInt(txtNivel.getText());
-				Integer charInt = Integer.parseInt(txtInt.getText());
-				Integer charLuk = Integer.parseInt(txtLuk.getText());
-				Integer hpMod = Integer.parseInt(txtHpLatest.getText());
-				Integer hpMax = Integer.parseInt(txtMaxHp.getText());
 
 				try {
+					Integer nivel = Integer.parseInt(txtNivel.getText());
+					Integer charInt = Integer.parseInt(txtInt.getText());
+					Integer charLuk = Integer.parseInt(txtLuk.getText());
+					Integer hpMod = Integer.parseInt(txtHpLatest.getText());
+					Integer hpMax = Integer.parseInt(txtMaxHp.getText());
 
 					if (nivel <= 0) {
 						JOptionPane.showMessageDialog(null, "Nível não pode ser menor que 1", "",
@@ -154,9 +157,9 @@ public class ViewFirstScreen {
 								+ (1 - (hpMod / hpMax)) * 20);
 						JOptionPane.showMessageDialog(null, "Chance de Esconjurar: " + chance + "%");
 					}
-				} 
-				catch (NumberFormatException error) {
-					JOptionPane.showMessageDialog(null, "Preencha os campos em branco", "", JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException err) {
+					JOptionPane.showMessageDialog(null, "Preencha os campos em branco", "",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
